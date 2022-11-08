@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: e03-dfh-service-front
+  namespace: e03-dfhvclnc
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      nodePort: 30101
+  selector:
+    app: e03-dfh-service-front
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: e03-dfh-service-front
+  namespace: e03-dfhvclnc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: e03-dfh-service-front
+  template:
+    metadata:
+      labels:
+        app: e03-dfh-service-front
+    spec:
+      volumes:
+        - name: nginx-log
+          hostPath:
+            path: /data/project/e03-dfh-service-front
+      containers:
+        - image: 172.34.120.87:9443/transwarp/e03-dfh-service-front:$imageTag
+          name: e03-dfh-service-front
+          imagePullPolicy: Always
+          env:
+            - name: TIME_ZONE
+              value: Asia/Shanghai
+          resources:
+            requests:
+              memory: 0.1Gi
+              cpu: 0.1
+            limits:
+              memory: 1Gi
+              cpu: 1
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-log
+              mountPath: /var/log/nginx
