@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="header cup">
+    <!-- <div class="header cup">
       <div>
         <div class="times">{{state.time}}</div>
         <div class="date flex">
@@ -26,7 +26,7 @@
           </li>
         </ul>
       </div>
-    </div>
+    </div> -->
     <div class="content">
       <keep-alive>
         <router-view v-if="$route.meta.keepAlive" />
