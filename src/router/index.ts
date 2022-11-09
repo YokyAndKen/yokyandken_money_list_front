@@ -8,6 +8,7 @@ const staticRoutes = [
   // { path: '/detail', name: 'detail', meta: {title: '报告详情', icon: 'index'},  component: () => import('@/views/detail.vue') },
   { path: '/', name: 'main', meta: {title: 'listMain', icon: 'index'},  component: () => import('@/views/listMain.vue') },
   { path: '/count', name: 'count', meta: {title: 'dataCount', icon: 'index'},  component: () => import('@/views/dataCount.vue') },
+  { path: '/cyto', name: 'cyto', meta: {title: 'cyto', icon: 'index'},  component: () => import('@/components/influenceCyGraph/CyGraph.vue') },
 ] 
 const noNavRoutes = [
   { path: '/:pathMatch(.*)*', name: 'NotFound', meta: {title: '404'}, component: () => import('@/views/404.vue') },

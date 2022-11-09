@@ -16,7 +16,7 @@ import cytoscape from "cytoscape";
 import styleSheetList from "./styleSheetList";//修改节点及边的样式 可自定义类去覆盖
 import {getAllInfoPathsHandler, getAllPath} from "./getAllPath.js";
 import {showSinglePath, resetAllClass} from "./pathView.js";
-import {addEvents, dbclickEvents, addClickEvents} from "./events.js";
+import {addEvents, dbclickEvents, addClickEvents, mouseoverEvents, mouseoutEvents } from "./events.js";
 import {getRelationPath} from "./getRelationPath.js"
 import {api as fullscreen} from 'vue-fullscreen'
 import png1 from './img/1.png'
@@ -50,6 +50,14 @@ const props = defineProps({
       nodes: [],
       edges: []
     })
+  },
+  mainNode: {
+    type: Number,
+    default: () => 33
+  },
+  ids: {
+    type: Array,
+    default: () => []
   },
   paths: {
     type: Array,
@@ -148,7 +156,7 @@ const state = reactive({
   paths: [],
   selectedPathId: -1,
   cy: null,
-  layout: 'random',
+  layout: 'grid',
   types: [],
   typeColors: {},
   typeSizes: {},
@@ -214,6 +222,13 @@ const LayoutOptions = {
     },
     randomize: false,
     infinite: true
+  }, 
+  'grid': {
+    name: 'grid',
+    avoidOverlapPadding: 10,
+    fit: true,
+    boundingBox: {x1:10, y1:10, w: 1500, h: 800},
+    avoidOverlap: true,
   }
 }
 //切换展示方式
@@ -242,11 +257,15 @@ const handleColorClick = (index) => {
   if (state.currentType !== '') {
     state.typeColors[state.currentType] = index
     if (!state.style[state.currentType]) state.style[state.currentType] = {}
-    state.style[state.currentType]["background-color"] = colors[state.typeColors[state.currentType]]
-    state.style[state.currentType]["border-color"] = borderColors[state.typeColors[state.currentType]]
+    // state.style[state.currentType]["background-color"] = colors[state.typeColors[state.currentType]]
+    state.style[state.currentType]["background-color"] = 'transparent'
+    // state.style[state.currentType]["border-color"] = borderColors[state.typeColors[state.currentType]]
+    state.style[state.currentType]["border-color"] = 'rgba(130, 255, 247, 1)'
     state.cy.$(`.${state.currentType}`).style({
-      "background-color": colors[state.typeColors[state.currentType]],
-      "border-color": borderColors[state.typeColors[state.currentType]],
+      // "background-color": colors[state.typeColors[state.currentType]],
+      // "border-color": borderColors[state.typeColors[state.currentType]],
+      "background-color": 'transparent',
+      "border-color": 'rgba(130, 255, 247, 1)',
     })
   }
 }
@@ -313,11 +332,38 @@ const OnceRelationship = () => {
           nodes.map(node => state.currentNode.push(state.cy.$(`#${node}`).data()))
         } else {
           // 点击节点
-          state.currentNode.push(state.cy.$(`#${nodes[0]}`).data())
+          // state.currentNode.push(state.cy.$(`#${nodes[0]}`).data())
         }
       }
       getRelationPath(nodes, cy, true)
     });
+    mouseoverEvents(state.cy, (nodes, cy, edge) => {
+      if (props.stopDefaultEvents) return
+      state.currentNode = []
+      if (!nodes.length) {
+        state.currentNode = []
+      } else {
+        // if (edge) {
+        //   // 点击关系
+        //   nodes.map(node => state.currentNode.push(state.cy.$(`#${node}`).data()))
+        // } else {
+          // 鼠标移入节点
+          state.cy.$(`#${nodes[0]}`).addClass('full_name');
+        // }
+      }
+    })
+
+    mouseoutEvents(state.cy, (nodes, cy, edge) => {
+      if (props.stopDefaultEvents) return
+      state.currentNode = []
+      if (!nodes.length) {
+        state.currentNode = []
+      } else {
+          // 鼠标移出节点
+          state.cy.$(`#${nodes[0]}`).removeClass('full_name');
+      }
+    })
+    
   }
 }
 
@@ -405,8 +451,10 @@ const getCalcColorsStyle = (node, type) => {
 
 const getStyle = (type) => {
   let style = {
-    "background-color": colors[state.typeColors[type]],
-    "border-color": borderColors[state.typeColors[type]],
+    // "background-color": colors[state.typeColors[type]],
+    // "border-color": borderColors[state.typeColors[type]],
+    "background-color": 'rgba(9, 17, 30, 1)',
+    "border-color": 'rgba(130, 255, 247, 1)',
     "border-width": 2,
     width: state.typeSizes[type] * sizePer,
     height: state.typeSizes[type] * sizePer
@@ -444,11 +492,16 @@ const init = (forceInit) => {
         styleSheetList.push({
           selector: `.${type}`,
           style: {
-            "background-color": colors[state.typeColors[type]],
-            "border-color": borderColors[state.typeColors[type]],
+            "background-color": 'rgba(9, 17, 30, 1)',
+            "border-color": 'rgba(130, 255, 247, 1)',
+            // "background-color": colors[state.typeColors[type]],
+            // "border-color": borderColors[state.typeColors[type]],
             "border-width": 2,
-            width: state.typeSizes[type] * sizePer,
-            height: state.typeSizes[type] * sizePer
+            // width: state.typeSizes[type] * sizePer,
+            // height: state.typeSizes[type] * sizePer
+            // 节点圆圈的大小
+            width: 80,
+            height: 80
           },
         })
       } else {
@@ -475,17 +528,18 @@ const init = (forceInit) => {
   if (state.layout === 'd3-force') {
     layout = LayoutOptions['d3-force']
   }
-
-  if (props.paths.length && !forceInit) {
-    layout = LayoutOptions['d3-force']
-  }
+  // if (props.ids.length && !forceInit) {
+  //   layout = LayoutOptions['grid']
+  // }
   state.cy = cytoscape({
     container: cyDom.value,  //应该呈现图形的HTML DOM元素。
     // elements: state.formattedData,  //指定节点和路径数据的选项。
     elements: state.formattedData,  //指定节点和路径数据的选项。
     zoom: 1,    // 初始化视口状态：1:图的初始缩放级别。
     style: styleSheetList,   //指定样式的选项。
-    layout
+    layout,
+    userPanningEnabled: false,
+    userZoomingEnabled: false,
   });
 
   if (!props.paths.length) {
@@ -504,38 +558,48 @@ const init = (forceInit) => {
     })
   }
 
-  if (props.paths.length) {
+  if (props.mainNode) {
     //获取canvas矩阵
     const extent = state.cy.extent()
-    const per = extent.w / props.paths.length
-    props.paths.forEach((id, index) => {
-      const node = state.cy.$id(id)
-      node.position({x: (extent.x1 + per / 2) * (index + 1), y: extent.y1 + extent.h / 2}).lock().style({
+    // const per = extent.w / props.paths.length
+    // props.paths.forEach((id, index) => {
+      const node = state.cy.$id(props.mainNode)
+      node.position({x: 160, y: extent.y1 + extent.h / 2}).lock().style({
         // 这里让后端传参带过来
-        width: 50,
-        height: 50
+        width: 100,
+        height: 100
       })
-      node.neighborhood().edges().forEach(edge => {
-        if(props.paths.includes(edge.target().id()) && props.paths.includes(edge.source().id())){
-          edge.addClass("path-edge").removeClass("edge")    // 这里加的类名是主线各个点之间关系线的样式
+      props.ids.forEach((id, index) => {
+        if(id !== props.mainNode) {
+          const node = state.cy.$id(id)
+          node.position({x: (400 + parseInt(index/5) * 200), y: extent.y1 + (index % 5) * 130 + 110} ).lock().style({
+            width: 80,
+            height: 80
+          })
         }
       })
-    })
-    addEvents(state.cy, (nodes, cy, edge) => {
-      if (props.stopDefaultEvents) return
-      state.currentNode = []
-      if (!nodes.length) {
-        state.currentNode = []
-      } else {
-        if (edge) {
-          // 点击关系
-          nodes.map(node => state.currentNode.push(state.cy.$(`#${node}`).data()))
-        } else {
-          // 点击节点
-          state.currentNode.push(state.cy.$(`#${nodes[0]}`).data())
-        }
-      }
-    });
+
+      // node.neighborhood().edges().forEach(edge => {
+      //   if(props.paths.includes(edge.target().id()) && props.paths.includes(edge.source().id())){
+      //     edge.addClass("path-edge").removeClass("edge")    // 这里加的类名是主线各个点之间关系线的样式
+      //   }
+      // })
+    // })
+    // addEvents(state.cy, (nodes, cy, edge) => {
+    //   if (props.stopDefaultEvents) return
+    //   state.currentNode = []
+    //   if (!nodes.length) {
+    //     state.currentNode = []
+    //   } else {
+    //     if (edge) {
+    //       // 点击关系
+    //       nodes.map(node => state.currentNode.push(state.cy.$(`#${node}`).data()))
+    //     } else {
+    //       // 点击节点
+    //       state.currentNode.push(state.cy.$(`#${nodes[0]}`).data())
+    //     }
+    //   }
+    // });
   }
 }
 const getArrItemNum = (arr) => {
@@ -658,8 +722,8 @@ defineExpose({
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 90%;
   overflow: hidden;
   box-sizing: border-box;
   padding: 5px;
@@ -828,4 +892,5 @@ defineExpose({
   width: 100%;
   height: 100%;
 }
+
 </style>

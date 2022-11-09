@@ -1,14 +1,15 @@
 <template>
-  <div style="height: 500px;">
-    <div style="height: 100%;">
+  <div style="height: 800px;width: 1500px; margin-left: 200px">
+    <div style="height: 100%;width: 100%">
       <CytoscapeComponent
-        style="width:100%;height:100%;background-color: #09111E;"
+        style="width:100%;height:100%;background-color: transparent;"
         ref="cytoscapeComponentRef"
         :data="state.graphData"
-        :paths="state.ids"
         :endPoints="state.endPoints"
-        :isDbclickEvents="true"
-        :isShowHeader="true"
+        :isDbclickEvents="false"
+        :mainNode='state.mainNode'
+        :ids="state.ids"
+        :isShowHeader="false"
         @getMoreDataFn="getMoreDataFn($event)"
       />
     </div>
@@ -48,6 +49,7 @@ const props = defineProps({
 })
 
 const state = reactive({
+  mainNode: 33,
   data:{
     nodes:[],
     edges:[]
@@ -83,7 +85,6 @@ const handleEchartsData = (data) => {
 
 
 const getMoreDataFn = async (params) => {
-  // console.log('图谱', params)
   const rootId = params.rootId
   let currentData = JSON.parse(JSON.stringify(state.graphData))
   const currentNodeIndex = currentData.nodes.findIndex(n => n.id === params.id)
@@ -175,22 +176,27 @@ const reportGetMore = async (reportName) => {
 
 
 onMounted(()=>{
-  setTimeout(()=>{
-    if(props.type === 'influence') {
-      getInfluencePath()
-    } else if (props.type === 'reason') {
-      reasonGetMore(props.reason)
-    } else {
-      reportGetMore(props.reportName)
-    }
-  },300)
+  // setTimeout(()=>{
+  //   if(props.type === 'influence') {
+  //     getInfluencePath()
+  //   } else if (props.type === 'reason') {
+  //     reasonGetMore(props.reason)
+  //   } else {
+  //     reportGetMore(props.reportName)
+  //   }
+  // },300)
+
+
+  state.data = path.data.graphParseResponse
+  state.ids = path.data.graphParseResponse.ids
+  state.graphData = handleEchartsData(state.data)
 })
 
-watch(()=>props.reason,(query)=>{
-  if(query) {
-    reasonGetMore(query)
-  }
-},{immediate:true})
+// watch(()=>props.reason,(query)=>{
+//   if(query) {
+//     reasonGetMore(query)
+//   }
+// },{immediate:true})
 
 // watch(()=>props.influenceReason,(query)=>{
 //   if(query) {

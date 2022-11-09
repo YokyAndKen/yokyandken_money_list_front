@@ -4,7 +4,8 @@ let handleObj = {
   timer: null,
   fn: null,
   params: null,
-  cy: null
+  cy: null,
+  position: null
 }
 
 export function addClickEvents(cy, findPathHandler) {
@@ -42,6 +43,34 @@ export function dbclickEvents(cy, callback) {
       }
     }
     callback(ev.target._private.data)
+  })
+}
+
+export function mouseoverEvents(cy, callback) {
+  cy.on('tapdragover', ev => {
+    if(ev.target._private.group === 'nodes') {
+      handleObj.fn = callback
+      handleObj.clickFlag = false
+      handleObj.timer = setTimeout(() => {
+        handleObj.clickFlag = true
+      }, 300)
+      handleObj.params = ev.target
+      handleObj.cy = cy   
+    }
+  })
+}
+
+export function mouseoutEvents(cy, callback) {
+  cy.on('tapdragout', ev => {
+    if(ev.target._private.group === 'nodes') {
+      handleObj.fn = callback
+      handleObj.clickFlag = false
+      // handleObj.timer = setTimeout(() => {
+        handleObj.clickFlag = true
+      // }, 300)
+      handleObj.params = ev.target
+      handleObj.cy = cy   
+    }
   })
 }
 
