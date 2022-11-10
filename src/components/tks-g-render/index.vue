@@ -705,14 +705,14 @@ defineExpose({
       </div>
      </div> -->
 
-     <div class="tks-g-list">
-        <div class="tks-g-list-item">
+     <div class="tks-g-list" v-if="state.listPosition.length<=5">
+        <div class="tks-g-list-item" :style="`margin-top:${state.listPosition[0]}px;`">
           <el-button @click="consoleClick()">click</el-button>
           详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情</div>
-        <div class="tks-g-list-item"></div>
-        <div class="tks-g-list-item"></div>
-        <div class="tks-g-list-item"></div>
-        <div class="tks-g-list-item"></div>
+        <div class="tks-g-list-item" :style="`margin-top:${(state.listPosition[1]-state.listPosition[0])-45}px;`"></div>
+        <div class="tks-g-list-item" :style="`margin-top:${(state.listPosition[1]-state.listPosition[0])-45}px;`"></div>
+        <div class="tks-g-list-item" :style="`margin-top:${(state.listPosition[1]-state.listPosition[0])-45}px;`"></div>
+        <div class="tks-g-list-item" :style="`margin-top:${(state.listPosition[1]-state.listPosition[0])-45}px;`"></div>
      </div>
 
     <!--
