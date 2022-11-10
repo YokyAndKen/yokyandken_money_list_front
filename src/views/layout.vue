@@ -28,10 +28,11 @@
       </div>
     </div> -->
     <div class="content">
-      <keep-alive>
+      <CyGraph style="width: 1500px; height: 800px;border: 1px solid red;"></CyGraph>
+      <!-- <keep-alive>
         <router-view v-if="$route.meta.keepAlive" />
       </keep-alive>
-      <router-view v-if="!$route.meta.keepAlive" />
+      <router-view v-if="!$route.meta.keepAlive" /> -->
     </div>
     <WarningDialog v-if="state.isShowWarningDialog" @sendCloseDialog="getCloseDialog"></WarningDialog>
   </div>
@@ -41,6 +42,7 @@
 import { ref, reactive, onMounted, onBeforeUnmount} from "vue";
 import { getAssetsFile } from '@/utils/getAssetsFile.ts'
 import WarningDialog from '@/components/common/WarningDialog.vue'
+import CyGraph from '@/components/influenceCyGraph/CyGraph.vue'
 import { useRouter,useRoute } from 'vue-router'
 
 const router = useRouter()

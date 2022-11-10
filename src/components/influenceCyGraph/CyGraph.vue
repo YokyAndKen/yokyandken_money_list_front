@@ -1,6 +1,6 @@
 <template>
-  <div style="height: 800px;width: 1500px; margin-left: 200px">
-    <div style="height: 100%;width: 100%">
+  <!-- <div style="height: 800px;width: 1500px; border: 1px solid red;"> -->
+    <!-- <div style="height: 100%;width: 100%"> -->
       <CytoscapeComponent
         style="width:100%;height:100%;background-color: transparent;"
         ref="cytoscapeComponentRef"
@@ -12,15 +12,15 @@
         :isShowHeader="false"
         @getMoreDataFn="getMoreDataFn($event)"
       />
-    </div>
-  </div>
+    <!-- </div> -->
+  <!-- </div> -->
 </template>
 
 <script setup>
 import { reactive, onMounted, watch, ref } from 'vue';
 import CytoscapeComponent from '@/components/tks-g-render/index.vue'
 import { getRelationPath } from "@/components/tks-g-render/getRelationPath.js"
-import path from './path.json'
+import path from './pathLow.json'
 import { influencePath, more } from '@/api/index.ts'
 
 const cytoscapeComponentRef = ref(null)

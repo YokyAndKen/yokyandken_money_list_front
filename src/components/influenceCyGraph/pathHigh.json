@@ -2,7 +2,7 @@
   "code": 200,
   "data": {
     "graphParseResponse": {
-      "ids": [ "33", "35", "36", "37", "38", "39", "40", "41", "42", "43"],
+      "ids": [ "33", "35", "36", "37", "38", "39", "40", "41", "42", "43", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65"],
       "nodes": [
         {
           "id": "33",
@@ -95,6 +95,94 @@
         },
         {
           "id": "35",
+          "label": "分系统",
+          "properties": {
+            "name": "测控分系统"
+          },
+          "userId": null
+        },
+        {
+          "id": "55",
+          "label": "分系统",
+          "properties": {
+            "name": "测控分系统"
+          },
+          "userId": null
+        },
+        {
+          "id": "56",
+          "label": "分系统",
+          "properties": {
+            "name": "测控分系统"
+          },
+          "userId": null
+        },
+        {
+          "id": "57",
+          "label": "分系统",
+          "properties": {
+            "name": "测控分系统"
+          },
+          "userId": null
+        },
+        {
+          "id": "58",
+          "label": "分系统",
+          "properties": {
+            "name": "测控分系统"
+          },
+          "userId": null
+        },
+        {
+          "id": "59",
+          "label": "分系统",
+          "properties": {
+            "name": "测控分系统"
+          },
+          "userId": null
+        },
+        {
+          "id": "60",
+          "label": "分系统",
+          "properties": {
+            "name": "测控分系统"
+          },
+          "userId": null
+        },
+        {
+          "id": "61",
+          "label": "分系统",
+          "properties": {
+            "name": "测控分系统"
+          },
+          "userId": null
+        },
+        {
+          "id": "62",
+          "label": "分系统",
+          "properties": {
+            "name": "测控分系统"
+          },
+          "userId": null
+        },
+        {
+          "id": "63",
+          "label": "分系统",
+          "properties": {
+            "name": "测控分系统"
+          },
+          "userId": null
+        },
+        {
+          "id": "64",
+          "label": "分系统",
+          "properties": {
+            "name": "测控分系统"
+          },
+          "userId": null
+        },
+        {
+          "id": "65",
           "label": "分系统",
           "properties": {
             "name": "测控分系统"

@@ -47,8 +47,10 @@ export function dbclickEvents(cy, callback) {
 }
 
 export function mouseoverEvents(cy, callback) {
-  cy.on('tapdragover', ev => {
+  cy.on('mousemove', ev => {
+    // console.log(ev)
     if(ev.target._private.group === 'nodes') {
+      
       handleObj.fn = callback
       handleObj.clickFlag = false
       handleObj.timer = setTimeout(() => {

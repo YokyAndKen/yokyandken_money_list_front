@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import locale from "element-plus/lib/locale/lang/zh-cn";
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-import '@/style/common.css'
+import '@/style/common.scss'
 import App from './App.vue'
 import router from './router'
 

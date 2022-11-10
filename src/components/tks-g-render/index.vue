@@ -166,7 +166,8 @@ const state = reactive({
   isFullScreen: false,
   graphWidth: 0,
   graphHeight: 0,
-  style: {}
+  style: {},
+  listPosition: [],
 });
 
 const activePath = computed(() => {
@@ -225,10 +226,7 @@ const LayoutOptions = {
   }, 
   'grid': {
     name: 'grid',
-    avoidOverlapPadding: 10,
-    fit: true,
-    boundingBox: {x1:10, y1:10, w: 1500, h: 800},
-    avoidOverlap: true,
+    
   }
 }
 //切换展示方式
@@ -561,23 +559,27 @@ const init = (forceInit) => {
   if (props.mainNode) {
     //获取canvas矩阵
     const extent = state.cy.extent()
-    // const per = extent.w / props.paths.length
+    const per = extent.w / 4
     // props.paths.forEach((id, index) => {
       const node = state.cy.$id(props.mainNode)
-      node.position({x: 160, y: extent.y1 + extent.h / 2}).lock().style({
+      node.position({y: extent.y1 + extent.h / 2}).lock().style({
         // 这里让后端传参带过来
         width: 100,
         height: 100
       })
+
+
       props.ids.forEach((id, index) => {
         if(id !== props.mainNode) {
           const node = state.cy.$id(id)
-          node.position({x: (400 + parseInt(index/5) * 200), y: extent.y1 + (index % 5) * 130 + 110} ).lock().style({
+          node.position({x: (400 + parseInt((index - 1)/5) * 200), y: extent.y1 + ((index) % 5) * 115 + 150} ).lock().style({
             width: 80,
             height: 80
           })
+          state.listPosition.push(extent.y1 + ((index - 1) % 5) * 115 + 150)
         }
       })
+      console.log('listPosition', state.listPosition)
 
       // node.neighborhood().edges().forEach(edge => {
       //   if(props.paths.includes(edge.target().id()) && props.paths.includes(edge.source().id())){
@@ -617,6 +619,10 @@ const getArrItemNum = (arr) => {
     }
   });
   return ArrObj
+}
+
+const consoleClick = () => {
+  console.log("click")
 }
 onMounted(() => {
   state.graphWidth = document.getElementsByClassName('tks-g-container')[0].parentNode.clientWidth
@@ -689,6 +695,26 @@ defineExpose({
       </div>
     </div>
 
+    <!-- 
+      实体详情栏
+      这里用v-for会出现触发不到元素，直接用v-if，然后用v-show控制显示隐藏
+     -->
+     <!-- <div class="tks-g-list" v-for="(item, index) in state.listPosition" :key="index" v-if="state.listPosition.length<=5">
+      <div class="tks-g-list-item" :style="`margin-top:${state.listPosition[0]+(state.listPosition[1]-state.listPosition[0]+40)*index}px;`" >
+        详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情
+      </div>
+     </div> -->
+
+     <div class="tks-g-list">
+        <div class="tks-g-list-item">
+          <el-button @click="consoleClick()">click</el-button>
+          详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情详情</div>
+        <div class="tks-g-list-item"></div>
+        <div class="tks-g-list-item"></div>
+        <div class="tks-g-list-item"></div>
+        <div class="tks-g-list-item"></div>
+     </div>
+
     <!--
       点击本体圆圈后,右侧弹框部分
     -->
@@ -722,8 +748,8 @@ defineExpose({
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   box-sizing: border-box;
   padding: 5px;
@@ -893,4 +919,16 @@ defineExpose({
   height: 100%;
 }
 
+.tks-g-list {
+  width: 1000px;height: 100%;position: absolute;margin-left: 250px;border: 2px solid red;
+  color: #fff;
+}
+.tks-g-list-item {
+  border: 1px solid #fff;height:80px;
+  font-size: 20px;
+  line-height: 32px;margin-top: 40px;
+  :hover {
+    color :red;
+  }
+}
 </style>

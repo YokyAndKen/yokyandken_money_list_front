@@ -2,7 +2,7 @@
   "code": 200,
   "data": {
     "graphParseResponse": {
-      "ids": [ "33", "35", "36", "37", "38", "39", "40", "41", "42", "43"],
+      "ids": [ "35", "36", "37", "38", "40"],
       "nodes": [
         {
           "id": "33",
@@ -13,51 +13,10 @@
           "userId": null
         },
         {
-          "id": "39",
-          "label": "分系统",
-          "properties": {
-            "name": "热控分系统"
-          },
-          "userId": null
-        },
-        {
-          "id": "42",
-          "label": "分系统",
-          "properties": {
-            "name": "天线分系统"
-          },
-          "userId": null
-        },
-        {
           "id": "37",
           "label": "分系统",
           "properties": {
             "name": "控制分系统"
-          },
-          "userId": null
-        },
-        {
-          "id": "43",
-          "label": "分系统",
-          "properties": {
-            "name": "转发器分系统转发器分系统\n转发器分系统转发器分系统转发器分系统转发器分系统转发器分系统转发器分系统"
-          },
-          "userId": null
-        },
-        {
-          "id": "222",
-          "label": "设备",
-          "properties": {
-            "name": "Ku多功能组件C2"
-          },
-          "userId": null
-        },
-        {
-          "id": "29",
-          "label": "故障现象",
-          "properties": {
-            "name": "2019年4月5日，ST-2（03）星Ku频段行波管放大器C2在轨静噪工作状态下， \n自动复位单元（Auto Restoration Unit, ARU）出现由1跳变为0再跳变为1的现象，表示该行波管发生了自动重启的异常问题。\n在4月5日~8日期间，这种ARU跳变现象共出现4次，\n前3次发生ARU跳变后，Ku频段行波管放大器C2的螺流、阳压、母线电流均正常；第4次发生ARU跳变后，\n其阳压异常上升到4983.49V（正常值为4870V），\n同时该器件未能正常重启，出现了异常关机现象。",
-            "id": 4
           },
           "userId": null
         },
@@ -73,28 +32,20 @@
           "id": "36",
           "label": "分系统",
           "properties": {
-            "name": "推进分系统"
-          },
-          "userId": null
-        },
-        {
-          "id": "40",
-          "label": "分系统",
-          "properties": {
-            "name": "数管分系统"
-          },
-          "userId": null
-        },
-        {
-          "id": "41",
-          "label": "分系统",
-          "properties": {
-            "name": "整星热控"
+            "name": "推进分系统推进分系统推进分系统\n推进分系统推进分系统推进分系统推进分系统"
           },
           "userId": null
         },
         {
           "id": "35",
+          "label": "分系统",
+          "properties": {
+            "name": "测控分系统"
+          },
+          "userId": null
+        },
+        {
+          "id": "40",
           "label": "分系统",
           "properties": {
             "name": "测控分系统"
@@ -1665,50 +1616,8 @@
           "start": "33"
         },
         {
-          "end": "39",
-          "id": "8508",
-          "label": "星_分系统",
-          "properties": {},
-          "start": "33"
-        },
-        {
-          "end": "42",
-          "id": "8514",
-          "label": "星_分系统",
-          "properties": {},
-          "start": "33"
-        },
-        {
-          "end": "222",
-          "id": "8223",
-          "label": "故障现象_设备",
-          "properties": {},
-          "start": "29"
-        },
-        {
-          "end": "43",
-          "id": "8515",
-          "label": "星_分系统",
-          "properties": {},
-          "start": "33"
-        },
-        {
           "end": "37",
           "id": "8504",
-          "label": "星_分系统",
-          "properties": {},
-          "start": "33"
-        },
-        {
-          "end": "222",
-          "id": "8695",
-          "label": "分系统_设备",
-          "properties": {},
-          "start": "43"
-        },
-        {
-          "end": "40",
-          "id": "8510",
           "label": "星_分系统",
           "properties": {},
           "start": "33"
@@ -1723,13 +1632,6 @@
         {
           "end": "35",
           "id": "8499",
-          "label": "星_分系统",
-          "properties": {},
-          "start": "33"
-        },
-        {
-          "end": "41",
-          "id": "8511",
           "label": "星_分系统",
           "properties": {},
           "start": "33"

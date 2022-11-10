@@ -242,3 +242,123 @@ a{text-decoration:none;}
 .back_word:hover {
   color: #fff
 }
+// 表格
+.el-table--fit {
+  background: transparent !important;
+}
+.el-table {
+	thead,
+	tbody {
+		border: none;
+	}
+	th.el-table__cell {
+		background: transparent;
+	}
+
+	th {
+		border: none !important;
+		height: 34px;
+		// background: #0d2133 !important;
+		margin: 0;
+		padding: 0;
+	}
+
+	td {
+		color: rgba(255, 255, 255, 0.6);
+		height: 38px !important;
+	}
+
+	.el-table__header {
+	}
+	.el-table__body {
+		border: none;
+	}
+	.cell {
+		line-height: 13px;
+	}
+	.el-table__inner-wrapper::before {
+		height: 0px;
+		background: transparent;
+	}
+	.el-table__expanded-cell {
+		background-color: transparent;
+	}
+	.el-table__row {
+		background: transparent !important;
+		border: none;
+		.el-table__cell {
+			border: none;
+			background: transparent !important;
+		}
+		&:hover {
+			background: linear-gradient(90deg, rgba(10, 22, 39, 0.5) 0%, #214167 47%, rgba(10, 22, 39, 0.5) 100%) !important;
+			//  background: transparent !important;
+		}
+	}
+	// 斑马颜色
+	.el-table__row--striped {
+		background: linear-gradient(90deg, rgba(10, 22, 39, 0.5) 0%, #214167 47%, rgba(10, 22, 39, 0.5) 100%) !important;
+		.el-table__cell {
+			background: transparent !important;
+		}
+	}
+	.el-table__body .el-table__row--striped:hover {
+		background-color: transparent !important;
+		background: linear-gradient(90deg, rgba(10, 22, 39, 0.5) 0%, #214167 47%, rgba(10, 22, 39, 0.5) 100%) !important;
+
+		&::after {
+			background: transparent !important;
+			content: '';
+			display: block;
+			width: 100%;
+			height: 34px;
+			position: absolute;
+			left: 0;
+			// margin-top: -1px;
+			border: 1px solid;
+			border-image: linear-gradient(270deg, rgba(23, 193, 212, 0), rgba(23, 193, 212, 1), rgba(23, 193, 212, 1), rgba(23, 193, 212, 0)) 1 1;
+		}
+		&::before {
+			display: none;
+		}
+	}
+
+	.el-table__body tr:hover > td {
+		background-color: transparent !important;
+	}
+	.el-table__body .current-row,
+	.el-table__body tr:hover {
+		background-color: transparent !important;
+		&::after {
+			background: transparent !important;
+			content: '';
+			display: block;
+			width: 100%;
+			height: 34px;
+			position: absolute;
+			left: 0;
+			margin-top: 1px;
+			border: 1px solid;
+			border-image: linear-gradient(90deg, rgba(23, 193, 212, 0), rgb(23, 193, 212), rgb(23, 193, 212), rgba(23, 193, 212, 0)) 1 1;
+		}
+		&::before {
+			display: none;
+		}
+	}
+
+	.el-table__row--striped {
+		border: none;
+	}
+}
+.el-table thead tr {
+	background: linear-gradient(270deg, rgba(12, 30, 51, 0.5) 0%, #0c1e33 51%, rgba(12, 30, 51, 0.5) 100%);
+	th {
+		line-height: 24px;
+		color: #fff;
+	}
+}
+
+.el-table--large .el-table__cell {
+	padding: 7px 0;
+	height: 30px;
+}
