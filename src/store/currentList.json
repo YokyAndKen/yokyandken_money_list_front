@@ -5,7 +5,7 @@
     "revenueType": "工资",
     "amount": 5000,
     "expendituresType": null,
-    "name": "lyx"
+    "context": "lyx"
   },
   {
     "date": "2022/12/7",
@@ -13,15 +13,15 @@
     "revenueType": null,
     "amount": 3,
     "expendituresType": "公共交通",
-    "name": "上下班"
+    "context": "上下班"
   },
   {
     "date": "2022/12/7",
     "type": "expenditures",
     "revenueType": null,
     "amount": 40,
-    "expendituresType": "生活支出",
-    "name": "外卖"
+    "expendituresType": "餐饮",
+    "context": "外卖"
   },
   {
     "date": "2022/12/7",
@@ -29,126 +29,6 @@
     "revenueType": null,
     "amount": 100,
     "expendituresType": "刚需支出",
-    "name": "电费"
-  },
-  {
-    "date": "2022/12/7",
-    "type": "expenditures",
-    "revenueType": null,
-    "amount": 3,
-    "expendituresType": "公共交通",
-    "name": "上下班"
-  },
-  {
-    "date": "2022/12/7",
-    "type": "expenditures",
-    "revenueType": null,
-    "amount": 40,
-    "expendituresType": "生活支出",
-    "name": "外卖"
-  },
-  {
-    "date": "2022/12/7",
-    "type": "expenditures",
-    "revenueType": null,
-    "amount": 100,
-    "expendituresType": "刚需支出",
-    "name": "电费"
-  },
-  {
-    "date": "2022/12/7",
-    "type": "expenditures",
-    "revenueType": null,
-    "amount": 3,
-    "expendituresType": "公共交通",
-    "name": "上下班"
-  },
-  {
-    "date": "2022/12/7",
-    "type": "expenditures",
-    "revenueType": null,
-    "amount": 40,
-    "expendituresType": "生活支出",
-    "name": "外卖"
-  },
-  {
-    "date": "2022/12/7",
-    "type": "expenditures",
-    "revenueType": null,
-    "amount": 100,
-    "expendituresType": "刚需支出",
-    "name": "电费"
-  },
-  {
-    "date": "2022/12/7",
-    "type": "expenditures",
-    "revenueType": null,
-    "amount": 3,
-    "expendituresType": "公共交通",
-    "name": "上下班"
-  },
-  {
-    "date": "2022/12/7",
-    "type": "expenditures",
-    "revenueType": null,
-    "amount": 40,
-    "expendituresType": "生活支出",
-    "name": "外卖"
-  },
-  {
-    "date": "2022/12/7",
-    "type": "expenditures",
-    "revenueType": null,
-    "amount": 100,
-    "expendituresType": "刚需支出",
-    "name": "电费"
-  },
-  {
-    "date": "2022/12/7",
-    "type": "expenditures",
-    "revenueType": null,
-    "amount": 3,
-    "expendituresType": "公共交通",
-    "name": "上下班"
-  },
-  {
-    "date": "2022/12/7",
-    "type": "expenditures",
-    "revenueType": null,
-    "amount": 40,
-    "expendituresType": "生活支出",
-    "name": "外卖"
-  },
-  {
-    "date": "2022/12/7",
-    "type": "expenditures",
-    "revenueType": null,
-    "amount": 100,
-    "expendituresType": "刚需支出",
-    "name": "电费"
-  },
-  {
-    "date": "2022/12/7",
-    "type": "expenditures",
-    "revenueType": null,
-    "amount": 3,
-    "expendituresType": "公共交通",
-    "name": "上下班"
-  },
-  {
-    "date": "2022/12/7",
-    "type": "expenditures",
-    "revenueType": null,
-    "amount": 40,
-    "expendituresType": "生活支出",
-    "name": "外卖"
-  },
-  {
-    "date": "2022/12/7",
-    "type": "expenditures",
-    "revenueType": null,
-    "amount": 100,
-    "expendituresType": "刚需支出",
-    "name": "电费"
+    "context": "电费"
   }
 ]

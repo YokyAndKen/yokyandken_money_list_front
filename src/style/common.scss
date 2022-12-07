@@ -216,132 +216,22 @@ a{text-decoration:none;}
     text-align: center;
     padding: 0 5px;
 }
-/* 方框标签tag */
-.tag_square {
-  width: 55px;
-  height: 24px;
-  background: rgba(209, 171, 85, 0.5000);
-  border: 1px solid rgba(255, 229, 94, 1);
-  font-size: 12px;
-  font-family: PingFang SC-Regular, PingFang SC;
-  font-weight: 400;
-  color: #FFFFFF;
-  border-radius: 2px;
-  text-align: center;
-  line-height: 24px;
-}
-.tag_square_red {
-  width: 55px;
-  height: 24px;
-  background: rgba(209, 107, 85, 0.50);
-  border: 1px solid rgba(255, 123, 94, 1);
-  font-size: 12px;
-  font-family: PingFang SC-Regular, PingFang SC;
-  font-weight: 400;
-  color: #FFFFFF;
-  border-radius: 2px;
-  text-align: center;
-  line-height: 24px;
-}
-.tag_square_blue {
-  width: 55px;
-  height: 24px;
-  background: rgba(100, 198, 211, 0.50);
-  border: 1px solid rgba(100, 198, 211, 1);
-  font-size: 12px;
-  font-family: PingFang SC-Regular, PingFang SC;
-  font-weight: 400;
-  color: #FFFFFF;
-  border-radius: 2px;
-  text-align: center;
-  line-height: 24px;
-}
-.tag_linear {
-  height: 22px;color: rgba(255, 255, 255, 0.8);
-  background: linear-gradient(180deg, #873D1D 0%, #531717 100%);
-  padding: 1px 6px;
-  font-size: 14px;
-}
-.tag_linear_red {
-  margin-right: 10px;color: rgba(255, 255, 255, 0.8);
-  width:auto; display:inline-block !important; display:inline;
-  height: 22px;
-  line-height: 22px;
-  background: linear-gradient(180deg, #873D1D 0%, #531717 100%);
-  padding: 1px 6px;
-  font-size: 14px;
-  text-align: center;
-}
-.tag_linear_blue {
-  margin-right: 10px;color: rgba(255, 255, 255, 0.8);
-  width:auto; display:inline-block !important; display:inline;
-  height: 22px;
-  line-height: 22px;
-  background: rgba(32,73,112,0.6);
-  padding: 1px 8px;
-  font-size: 14px;
-  text-align: center;
-}
-.tag_linear_green {
-  margin-right: 10px;color: rgba(255, 255, 255, 0.8);
-  width:auto; display:inline-block !important; display:inline;
-  height: 22px;
-  line-height: 22px;
-  background: rgba(32,112,92,0.6);  
-  padding: 1px 8px;
-  font-size: 14px;
-  text-align: center;
-}
-.tag_linear_yellow {
-  margin-right: 10px;color: rgba(255, 255, 255, 0.8);
-  width:auto; display:inline-block !important; display:inline;
-  height: 22px;
-  line-height: 22px;
-  background: linear-gradient(180deg, #B08F1A 0%, #534217 100%);
-  padding: 1px 8px;
-  font-size: 14px;
-  text-align: center;
-}
-.tag_linear_grey {
-  margin-right: 10px;color: rgba(255, 255, 255, 0.8);
-  width:auto; display:inline-block !important; display:inline;
-  height: 22px;
-  line-height: 22px;
-  background: rgba(106,106,106,0.6);
-  padding: 1px 8px;
-  font-size: 14px;
-  text-align: center;
-}
-
-/* 页码样式 */
 
 /* 搜索框样式 */
-.search_input_box {
-  width: 600px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 0 5px;
-  background: rgba(3, 5, 6, 1);
-  border: 1px solid rgba(11, 161, 179, 0.6000);
-  border-radius: 4px 4px 4px 4px;
-}
-:deep(.el-input__wrapper) {
+.el-input__wrapper {
   width: 450px;
-  height: 40px !important;
-  background: rgba(3, 5, 6, 1);
-  border: 0;  
+  height: 30px !important;
+  background: transparent;
+  border-bottom: 1px solid #a58262;  
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.4000);
+  color: #a58262;
   box-shadow: 0 0 0 0 !important;
+  border-radius: 0px;
 }
-:deep(.el-input__inner) {
-  color: rgb(208, 227, 255) !important;
-  background: rgba(3, 5, 6, 1) !important;
-}
-.search_button {
-  background: rgba(3, 5, 6, 1) !important;
-  border: 0;
+.el-input__inner {
+  height: 30px !important;
+  color: #a58262 !important;
+  background: transparent !important;
 }
 
 /* 标题组件右侧的文字样式 */
@@ -567,22 +457,23 @@ a{text-decoration:none;}
   }
 }
 .el-select-dropdown__wrap {
-  background: #0c1e33;
-  border: 1px solid rgba(42, 207, 226, 1) !important;
+  background: #c9b097;
+  border-bottom: 1px solid #410d18 !important;
   box-shadow: 0 !important;
 }
 .el-select-dropdown__item{
+  color: #410d18;
   &:hover{ 
-    background: rgba(10, 25, 38, 1) !important;
+    background: #c9b097 !important;
   }
 }
 
 .el-select-dropdown__item.selected {
-  background: rgba(10, 25, 38, 1) !important;
+  background: #a58262 !important;
 }
 
 .el-select-dropdown__item.hover, .el-select-dropdown__item:hover {
-  background: rgba(10, 25, 38, 1) !important;
+  background: #a58262 !important;
 }
 
 .el-tree-node__expand-icon.is-leaf {
@@ -605,4 +496,7 @@ a{text-decoration:none;}
   &:hover{
     color: #eff0eb;
   }
+}
+.el-form-item__label {
+  color: #eff0eb;
 }
