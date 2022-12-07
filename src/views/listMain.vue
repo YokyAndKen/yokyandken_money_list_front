@@ -1,10 +1,6 @@
 <template>
   <div style="color: red;">
-      <el-table :data="tableData" stripe style="width: 100%">
-        <el-table-column prop="date" label="Date" width="180" />
-        <el-table-column prop="name" label="Name" width="180" />
-        <el-table-column prop="address" label="Address" />
-      </el-table>
+      统计
   </div>
   <!-- 主要添加统计项 -->
 

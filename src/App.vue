@@ -9,16 +9,7 @@ import Layout from '@/views/layout.vue'
 </template>
 
 <style>
-/* el-dialog 样式 */
-.el-dialog {
-  box-shadow: 0px -10px 30px #25a8e0;
-  border: 10px solid #ddd;
-  border-image: linear-gradient(#1feddf, rgba(66, 136, 182, 0)) 20 20 0 20;
-}
 .el-dialog__headerbtn {
   top: -4px;
-}
-.el-overlay {
-  z-index: 999999!important;
 }
 </style>

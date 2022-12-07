@@ -8,9 +8,11 @@ import router from './router'
 
 import mitt from 'mitt'
 
-
+import {createPinia} from 'pinia'
+const state = createPinia()
 
 const app = createApp(App)
+app.use(state)
 app.use(router)
 app.use(ElementPlus, { locale })
 app.mount('#app')
