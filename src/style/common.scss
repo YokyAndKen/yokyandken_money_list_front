@@ -29,7 +29,6 @@ a{text-decoration:none;}
 .title {
   font-size: 20px;
   font-family: YouSheBiaoTiHei-Regular, YouSheBiaoTiHei;
-  color: #5f271d;
 }
 /* 小标题 */
 .subheading {
@@ -46,10 +45,10 @@ a{text-decoration:none;}
   font-size: 24px;
   font-family: YouSheBiaoTiHei-Regular, YouSheBiaoTiHei;
   font-weight: 400;
-  color: #410d18;
   line-height: 21px;
+  color: #a6a9ad;
   &:hover{
-    color: #955141;
+    color: #fff;
   }
 }
 /* 数字 */
@@ -222,15 +221,15 @@ a{text-decoration:none;}
   width: 450px;
   height: 30px !important;
   background: transparent;
-  border-bottom: 1px solid #a58262;  
+  border-bottom: 1px solid #1D1D1D;  
   font-size: 14px;
-  color: #a58262;
+  color: #1D1D1D;
   box-shadow: 0 0 0 0 !important;
   border-radius: 0px;
 }
 .el-input__inner {
   height: 30px !important;
-  color: #a58262 !important;
+  color: #1D1D1D !important;
   background: transparent !important;
 }
 
@@ -259,7 +258,7 @@ a{text-decoration:none;}
 		border: none;
 	}
 	th.el-table__cell {
-		background: #fffff3;
+		background: transparent;
 	}
 
 	th {
@@ -270,7 +269,7 @@ a{text-decoration:none;}
 	}
 
 	td {
-		color: #5f271d;
+		color: #CFD3DC;
 		height: 38px !important;
 	}
 	.el-table__body {
@@ -281,17 +280,17 @@ a{text-decoration:none;}
 	}
 	.el-table__inner-wrapper::before {
 		height: 0px;
-		background: #fffff3;
+		background: #303030;
 	}
 	.el-table__expanded-cell {
-		background-color: #fffff3;
+		background-color: #303030;
 	}
 	.el-table__row {
-		background: #fffff3 !important;
+		background: #303030 !important;
 		border: none;
 		.el-table__cell {
 			border: none;
-			background: #fffff3 !important;
+			background: #39393A !important;
 		}
 		&:hover {
 			background: #e0eddc !important;
@@ -299,17 +298,17 @@ a{text-decoration:none;}
 	}
 	// 斑马颜色
 	.el-table__row--striped {
-		background: #fffff3 !important;
+		background: #303030 !important;
 		.el-table__cell {
-			background: #fffff3 !important;
+			background: #303030 !important;
 		}
 	}
 	.el-table__body .el-table__row--striped:hover {
-		background-color: #fffff3 !important;
-		background: #e0eddc !important;
+		background-color: #303030 !important;
+		background: #262727 !important;
 
 		&::after {
-			background: #adc196 !important;
+			background: #363637 !important;
 			content: '';
 			display: block;
 			width: 100%;
@@ -324,13 +323,14 @@ a{text-decoration:none;}
 	}
 
 	.el-table__body tr:hover > td {
-		background-color: #adc196 !important;
+		background-color: #CFD3DC !important;
+    color: #141414;
 	}
 	.el-table__body .current-row,
 	.el-table__body tr:hover {
-		background-color: #adc196 !important;
+		background-color: #CFD3DC !important;
 		&::after {
-			background: #adc196 !important;
+			background: #CFD3DC !important;
 			content: '';
 			display: block;
 			width: 100%;
@@ -350,10 +350,10 @@ a{text-decoration:none;}
 	}
 }
 .el-table thead tr {
-	background: #adc196;
+	background: #1D1D1D;
 	th {
 		line-height: 24px;
-		color: #5f271d;
+		color: #CFD3DC;
 	}
 }
 
@@ -406,17 +406,21 @@ a{text-decoration:none;}
   color :rgba(22, 119, 255, 1) !important;
 }
 .el-dialog {
-  background: #410d18;
+  background: #CFD3DC;
 }
 .el-dialog__header {
   font-size: 18px;
   font-family: YouSheBiaoTiHei-Regular, YouSheBiaoTiHei;
   font-weight: 400;
-  color: #f0e9e1 !important;
+  color: #363637 !important;
   line-height: 21px;
 }
 .el-dialog__title {
-  color: #f0e9e1 !important;
+  color: #363637 !important;
+}
+.el-form-item__label {
+  color: #363637 !important;
+  font-weight: bold;
 }
 .page_container{
   position: absolute;
@@ -457,23 +461,25 @@ a{text-decoration:none;}
   }
 }
 .el-select-dropdown__wrap {
-  background: #c9b097;
-  border-bottom: 1px solid #410d18 !important;
+  background: #303030;
+  border-bottom: 1px solid #CFD3DC !important;
   box-shadow: 0 !important;
 }
 .el-select-dropdown__item{
-  color: #410d18;
+  color: #CFD3DC;
   &:hover{ 
-    background: #c9b097 !important;
+    background: #A3A6AD !important;
   }
 }
 
 .el-select-dropdown__item.selected {
-  background: #a58262 !important;
+  background: #A3A6AD !important;
+  color: #1D1D1D;
 }
 
 .el-select-dropdown__item.hover, .el-select-dropdown__item:hover {
-  background: #a58262 !important;
+  background: #A3A6AD !important;
+  color: #1D1D1D;
 }
 
 .el-tree-node__expand-icon.is-leaf {
@@ -487,14 +493,14 @@ a{text-decoration:none;}
 
 .handleBox {
   font-size: 12px;
-  color: #44765b;
+  color: #a6a9ad;
 }
 .handleSpan {
   cursor: pointer;
   font-size: 12px;
   margin-right: 5px;
-  &:hover{
-    color: #eff0eb;
+  &:hover {
+    color: #141414;;
   }
 }
 .el-form-item__label {

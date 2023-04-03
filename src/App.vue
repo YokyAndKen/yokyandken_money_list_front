@@ -7,9 +7,3 @@ import Layout from '@/views/layout.vue'
 <template>
   <Layout />
 </template>
-
-<style>
-.el-dialog__headerbtn {
-  top: -4px;
-}
-</style>

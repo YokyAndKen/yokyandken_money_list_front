@@ -1,5 +1,5 @@
 <template>
-  <div style="color: red;">
+  <div>
       统计
   </div>
   <!-- 主要添加统计项 -->

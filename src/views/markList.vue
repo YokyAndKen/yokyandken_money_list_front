@@ -1,20 +1,22 @@
 <template>
   <div class="markList_container">
     <div class="flex">
-      <div class="cup add_btn" @click="addItem()">新建条目</div>
       <div class="cup add_btn" @click="submitTable()" style="width: 120px;">提交今日账单</div>
     </div>
     <div class="fast_btn_container flex">
       <div class="title" style="margin-top: 8px;">快捷添加：</div>
-      <!-- 需要添加一个设置快捷按钮的入口 -->
-      <div class="cup fast_add_btn" @click="fastAddList(1)"> 公共交通 ￥5 </div>
-      <div class="cup fast_add_btn" @click="fastAddList(2)"> 基金定投 ￥80 </div>
-      <div class="cup fast_add_btn" @click="fastAddList(3)"> 水 ￥3 </div>
+      <div class="cup fast_add_btn" @click="fastAddList(1)"> 公共交通 ￥10 </div>
     </div>
 
     <!-- 今日账单表格 -->
     <div class="current_table_container" v-if="store.currentList.length !== 0">
-      <div class="title" style="margin-top: 8px;margin-bottom: 8px;">今日账单：</div>
+      <div class="flex flex-space-between" style="margin-bottom: 10px;">
+        <div class="title" style="margin-top: 8px;margin-bottom: 8px;">今日账单：</div>
+        <div class="cup add_btn flex flex-center" @click="addItem()" style="align-items: center">
+          <span>新建条目</span> 										
+          <el-icon style="color: #fff;"><CirclePlus /></el-icon>
+        </div>
+      </div>
       <el-table :data="store.currentList" stripe style="width: 100%"  height="500" >
         <el-table-column type="index" width="60" label="编号"/>
         <el-table-column prop="date" label="日期" />
@@ -61,9 +63,9 @@
 
     <!-- 统计框 -->
     <div class="amount_count_container flex">
-      <div class="title" style="margin-top: 8px;margin-bottom: 8px;">收入总计：<span class="count_number" style="color: #626aa9">{{store.revenueAmount}}</span></div>
-      <div class="title" style="margin-top: 8px;margin-bottom: 8px;">支出总计：<span class="count_number" style="color: #626aa9">{{store.expendituresAmount}}</span></div>
-      <div class="title" style="margin-top: 8px;margin-bottom: 8px;">平衡收支：<span class="count_number" :style="store.revenueAmount - store.expendituresAmount < -66 ? 'color: #d45a36': 'color: #45497a'">{{store.revenueAmount - store.expendituresAmount}}</span></div>
+      <div class="title" style="margin-top: 8px;margin-bottom: 8px;">收入总计：<span class="count_number" style="color: #A3A6AD">{{store.revenueAmount}}</span></div>
+      <div class="title" style="margin-top: 8px;margin-bottom: 8px;">支出总计：<span class="count_number" style="color: #A3A6AD">{{store.expendituresAmount}}</span></div>
+      <div class="title" style="margin-top: 8px;margin-bottom: 8px;">平衡收支：<span class="count_number" style="color: #A3A6AD">{{store.revenueAmount - store.expendituresAmount}}</span></div>
     </div>
 
     <!-- 新增项 | 编辑项弹框 -->
@@ -77,19 +79,18 @@
         <el-form
           ref="ruleFormRef"
           :model="ruleForm"
-          :rules="rules"
           label-width="120px"
           class="demo-ruleForm"
           :size="formSize"
           status-icon
         >
-          <el-form-item label="具体内容" prop="context">
+          <el-form-item label="具体内容" prop="context" required>
             <el-input v-model="state.addForm.context" />
           </el-form-item>
-          <el-form-item label="金额" prop="amount">
+          <el-form-item label="金额" prop="amount" required>
             <el-input v-model="state.addForm.amount" />
           </el-form-item>
-          <el-form-item label="收支选择" prop="type">
+          <el-form-item label="收支选择" prop="type" required>
             <el-select v-model="state.addForm.type" placeholder="请选择收支类型">
               <el-option :label="item.label" :value="item.value"  v-for="item in state.type"/>
             </el-select>
@@ -113,15 +114,16 @@
                   label="Pick a date"
                   placeholder="Pick a date"
                   style="width: 100%"
+                  value-format="YYYY-MM-DD"
                 />
               </el-form-item>
             </el-col>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="submitForm(ruleFormRef)"
+            <el-button plain @click="submitForm(ruleFormRef)"
               >确定</el-button
             >
-            <el-button @click="resetForm(ruleFormRef)">取消</el-button>
+            <el-button @click="resetForm(ruleFormRef)" type="info">取消</el-button>
           </el-form-item>
         </el-form>
     </el-dialog>
@@ -132,6 +134,7 @@
 import { ref, reactive, onMounted, onBeforeUnmount, watch } from "vue";
 import { mainStore } from "@/store/index";
 import currentList from "@/store/currentList.json"
+import { CirclePlus } from '@element-plus/icons-vue';
 
 const ruleFormRef = ref<FormInstance>()
 
@@ -156,40 +159,6 @@ const state = reactive({
   expendituresCount: 0,
 })
 
-const rules = reactive<FormRules>({
-  context: [{ required: true, message: '请输入具体消费项', trigger: 'blur' }],
-  amount: [{ required: true, message: '请输入具体金额', trigger: 'blur' }],
-  date: [
-    {
-      type: 'date',
-      required: true,
-      message: '请选择消费日期',
-      trigger: 'blur',
-    },
-  ],
-  type: [
-    {
-      required: true,
-      message: '请选择收支类型',
-      trigger: 'blur',
-    },
-  ],
-  revenue: [
-    {
-      required: true,
-      message: '请选择收入类型',
-      trigger: 'blur',
-    },
-  ],
-  expenditures: [
-    {
-      required: true,
-      message: '请选择支出类型',
-      trigger: 'blur',
-    },
-  ],
-})
-
 const addItem = () => {
   state.showAddDialog = true
 } 
@@ -199,6 +168,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   if(state.dialogTitle === '新增记账条目'){
     state.showAddDialog = false
+    console.log('form', state.addForm.date)
     store.currentList.push(state.addForm)
     formEl.resetFields()
   } else if (state.dialogTitle === '编辑记账条目'){
@@ -253,27 +223,27 @@ onMounted(() => {
   height: 100%;
 }
 .add_btn {
-  background: #5f271d;width: 100px;border: 1px solid #410d18;margin-right: 10px;
+  background: #141414;width: 100px;border: 1px solid #A3A6AD;margin-right: 10px;
   color: #fff;height: 30px;font-size: 16px;text-align: center;line-height: 30px;
   &:hover {
-    background: #955141;
+    background: #303030;
   }
 }
 .fast_btn_container {
-  margin-top: 10px;border: 1px solid #a58262;padding: 10px;width: calc(100% - 50px);
+  margin-top: 10px;border: 1px solid grey;padding: 10px;width: calc(100% - 50px);
   .fast_add_btn {
-  background: #a58262;border: 1px solid #410d18;padding-left: 10px;padding-right: 10px;
+  background: #141414;border: 1px solid #A3A6AD;padding-left: 10px;padding-right: 10px;
   color: #fff;height: 30px;font-size: 16px;text-align: center;line-height: 30px;margin-right: 5px;
   &:hover {
-    background: #c9b097;
+    background: #303030;
   }
 }
 }
 .current_table_container {
-  margin-top: 10px;border: 1px solid #a58262;padding: 10px;width: calc(100% - 50px);height: 500px;
+  margin-top: 10px;border: 1px solid grey;padding: 10px;width: calc(100% - 50px);height: 500px;
 }
 .amount_count_container {
-  margin-top: 10px;border: 1px solid #a58262;padding: 10px;width: calc(100% - 50px);height: 60px;
+  margin-top: 10px;border: 1px solid grey;padding: 10px;width: calc(100% - 50px);height: 60px;
 }
 .title {
   margin-right: 10px;
