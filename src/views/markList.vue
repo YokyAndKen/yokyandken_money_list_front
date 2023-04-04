@@ -17,9 +17,16 @@
           <el-icon style="color: #fff;"><CirclePlus /></el-icon>
         </div>
       </div>
-      <el-table :data="store.currentList" stripe style="width: 100%"  height="500" >
+      <el-table :data="store.currentList" stripe style="width: 100%;height: calc(100% - 40px)">
         <el-table-column type="index" width="60" label="编号"/>
         <el-table-column prop="date" label="日期" />
+        <el-table-column prop="revenueType" label="发生人" >
+          <template #default="scope">
+            <span :class="scope.row.person==='ken'?'dark_green_square':scope.row.person==='yoky'?'dark_blue_square':'white_square'">
+              {{scope.row.person}}
+            </span>
+          </template>
+        </el-table-column>
         <el-table-column prop="type" label="收支类型">
           <template #default="scope">
             <div v-if="scope.row.type === 'revenue'">收入</div>
@@ -28,13 +35,19 @@
         </el-table-column>
         <el-table-column prop="revenueType" label="收入类型" >
           <template #default="scope">
-            <div v-if="scope.row.revenueType">{{scope.row.revenueType}}</div>
+            <span v-if="scope.row.revenueType" :class="scope.row.revenueType==='工资'?'green_square':scope.row.revenueType==='红包'?'yellow_square':'blue_square'">
+              {{scope.row.revenueType}}
+            </span>
             <div v-else>--</div>
           </template>
         </el-table-column>
         <el-table-column prop="expendituresType" label="支出类型">
           <template #default="scope">
-            <div v-if="scope.row.expendituresType">{{scope.row.expendituresType}}</div>
+            <div v-if="scope.row.expendituresType">
+              <span v-if="scope.row.expendituresType==='刚需支出'||scope.row.expendituresType==='餐饮'" class="green_square">{{scope.row.expendituresType}}</span>
+              <span v-if="scope.row.expendituresType==='公共交通'||scope.row.expendituresType==='学习'" class="yellow_square">{{scope.row.expendituresType}}</span>
+              <span v-if="scope.row.expendituresType==='购物'||scope.row.expendituresType==='股票基金投资'" class="red_square">{{scope.row.expendituresType}}</span>
+            </div>
             <div v-else>--</div>
           </template>
         </el-table-column>
@@ -78,19 +91,23 @@
     >
         <el-form
           ref="ruleFormRef"
-          :model="ruleForm"
+          :model="state.addForm"
           label-width="120px"
-          class="demo-ruleForm"
-          :size="formSize"
+          :rules="serverFormRules"
           status-icon
         >
-          <el-form-item label="具体内容" prop="context" required>
-            <el-input v-model="state.addForm.context" />
+          <el-form-item label="具体内容" prop="context">
+            <el-input v-model="state.addForm.context" clearable placeholder="请输入具体内容"/>
           </el-form-item>
-          <el-form-item label="金额" prop="amount" required>
-            <el-input v-model="state.addForm.amount" />
+          <el-form-item label="金额" prop="amount">
+            <el-input v-model="state.addForm.amount" clearable placeholder="请输入金额"/>
           </el-form-item>
-          <el-form-item label="收支选择" prop="type" required>
+          <el-form-item label="条目发生人" prop="person">
+            <el-select v-model="state.addForm.person" placeholder="请选择收支类型">
+              <el-option :label="item" :value="item"  v-for="item in state.personOptopms"/>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="收支选择" prop="type">
             <el-select v-model="state.addForm.type" placeholder="请选择收支类型">
               <el-option :label="item.label" :value="item.value"  v-for="item in state.type"/>
             </el-select>
@@ -105,7 +122,7 @@
               <el-option :label="item" :value="item"  v-for="item in state.expendituresOptions"/>
             </el-select>
           </el-form-item>
-          <el-form-item label="消费时间" required>
+          <el-form-item label="消费时间">
             <el-col :span="11">
               <el-form-item prop="date">
                 <el-date-picker
@@ -132,6 +149,7 @@
 
 <script setup lang='ts'>
 import { ref, reactive, onMounted, onBeforeUnmount, watch } from "vue";
+import type { FormInstance, FormRules } from 'element-plus'
 import { mainStore } from "@/store/index";
 import currentList from "@/store/currentList.json"
 import { CirclePlus } from '@element-plus/icons-vue';
@@ -140,20 +158,29 @@ const ruleFormRef = ref<FormInstance>()
 
 const store = mainStore();
 
+let serverFormRules = reactive<FormRules>({
+  context: [{ required: true, message: '请输入具体内容', trigger: 'blur'}],
+  type: [{ required: true, message: '请选择类型', trigger: ['blur', 'change']}],
+  amount: [{ required: true, message: '请输入金额', trigger: 'blur' }],
+  date: [{ required: true, message: '请选择日期', trigger: ['blur', 'change']}],
+})
+
 const state = reactive({
   showAddDialog: false,
   addForm: {
-    date: '',
+    date: new Date(),
     type: '',
     context: '',
     expendituresType: '',
     revenueType: '',
-    amount: ''
+    amount: '',
+    person: ''
   },
   type: [{label: '收入', value: 'revenue'}, {label: '支出', value: 'expenditures'}],
   dialogTitle: '新增记账条目',
   editIndex: '',
   revenueOptions: ['工资', '红包', '其他收入'],
+  personOptopms: ['yoky', 'ken', 'family'],
   expendituresOptions: ['公共交通', '餐饮', '刚需支出', '购物', '游戏', '学习', '股票基金投资'],
   revenueCount: 0,
   expendituresCount: 0,
@@ -170,11 +197,11 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     state.showAddDialog = false
     console.log('form', state.addForm.date)
     store.currentList.push(state.addForm)
-    formEl.resetFields()
+    cleanAddForm()
   } else if (state.dialogTitle === '编辑记账条目'){
     state.showAddDialog = false
     store.currentList[state.editIndex] = state.addForm
-    formEl.resetFields()
+    cleanAddForm()
   }
 }
 
@@ -195,18 +222,26 @@ const delRow = (row) => {
 // 关闭新增表单弹框 | 点击取消
 const resetForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return
-  formEl.resetFields()
+  cleanAddForm()
   state.showAddDialog = false
 }
 
 // 快速添加
 const fastAddList = (type) => {
   if (type==1) {
-    store.currentList.push({date: state.addForm.date, type: 'expenditures', context: '公共交通',expendituresType: '公共交通',revenueType: '',amount: '5'})
-  } else if (type==2) {
-    store.currentList.push({date: state.addForm.date, type: 'expenditures', context: '基金定投',expendituresType: '股票基金投资',revenueType: '',amount: '80'})
-  } else if (type==3) {
-    store.currentList.push({date: state.addForm.date, type: 'expenditures', context: '水',expendituresType: '餐饮',revenueType: '',amount: '3'})   
+    store.currentList.push({date: state.addForm.date, type: 'expenditures', context: '公共交通',expendituresType: '公共交通',revenueType: '',amount: '5', person: 'yoky'})
+  }
+}
+
+// 清空表格
+const cleanAddForm = () => {
+  state.addForm = {
+    date: new Date(),
+    type: '',
+    context: '',
+    expendituresType: '',
+    revenueType: '',
+    amount: ''
   }
 }
 

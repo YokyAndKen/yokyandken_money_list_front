@@ -2,7 +2,7 @@
   <div class="container">
     <div class="header flex">
       <div class="router_btn cup" v-for="nav in state.sides" @click="navTo(nav.path, index)" >
-        <span class="text_title" :style="router.currentRoute.value.name === nav.name ? 'color: #fff;border-bottom: 3px solid #fff' : ''">{{nav.meta.title}}</span>
+        <span class="text_title" :style="router.currentRoute.value.name === nav.name ? 'color: #1677FF;border-bottom: 3px solid #1677FF' : ''">{{nav.meta.title}}</span>
       </div>
       <div class="times">{{state.time}}</div>
       <div class="date flex">
@@ -118,13 +118,13 @@ onBeforeUnmount(() => {
   position: relative;
   width: 100%;
   height: 100vh;
-  background: #333;
-  color: #fff;
+  background: #FFFFFF;
+  color: #333333;
   .header {
     width: 100%;margin-top: 10px;
     height: 40px;
     padding-bottom: 10px;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid #E2E6E9;
   }  
   .content {
     overflow: hidden;
@@ -144,7 +144,7 @@ onBeforeUnmount(() => {
   font-size: 26px;
   line-height: 35px;
   font-weight: bold;
-  color: #CFD3DC;
+  color: #333333;
 }
 .date {
   position: absolute;
@@ -153,7 +153,7 @@ onBeforeUnmount(() => {
   font-size: 14px;
   font-family: DINPro-Bold, DINPro;
   line-height: 14px;
-  color: #CFD3DC;
+  color: #333333;
   div {
     &:first-child {
       margin-bottom: 5px;

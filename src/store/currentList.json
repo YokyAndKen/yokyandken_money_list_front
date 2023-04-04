@@ -4,6 +4,7 @@
     "type": "revenue",
     "revenueType": "工资",
     "amount": 5000,
+    "person": "yoky",
     "expendituresType": null,
     "context": "lyx"
   },
@@ -12,6 +13,7 @@
     "type": "expenditures",
     "revenueType": null,
     "amount": 3,
+    "person": "yoky",
     "expendituresType": "公共交通",
     "context": "上下班"
   },
@@ -20,14 +22,25 @@
     "type": "expenditures",
     "revenueType": null,
     "amount": 40,
+    "person": "family",
     "expendituresType": "餐饮",
     "context": "外卖"
+  },
+  {
+    "date": "2022/12/7",
+    "type": "revenue",
+    "revenueType": "工资",
+    "amount": 5000,
+    "person": "ken",
+    "expendituresType": null,
+    "context": "lyx"
   },
   {
     "date": "2022/12/7",
     "type": "expenditures",
     "revenueType": null,
     "amount": 100,
+    "person": "family",
     "expendituresType": "刚需支出",
     "context": "电费"
   }
